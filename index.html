@@ -1,20 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dynamic Quote Generator</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dynamic Quote Generator — Storage & JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f6fa;
+      text-align: center;
+    }
+    h1 { color: #2f3640; }
+    #quoteDisplay {
+      margin: 20px auto;
+      padding: 16px;
+      background: #fff;
+      border-radius: 10px;
+      max-width: 700px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      font-size: 1.15rem;
+    }
+    .controls { margin-top: 12px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+    .input-section { margin-top: 18px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap; }
+    input[type="text"] { padding:8px; border-radius:6px; border:1px solid #dcdde1; min-width:200px; }
+    button, select {
+      padding: 8px 12px; border-radius:6px; border: none; background:#40739e; color:#fff; cursor:pointer;
+    }
+    button.secondary { background: #FF6565; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    #importFile { display:inline-block; padding:4px; background:transparent; color:inherit; border:none; }
+    .note { font-size:0.9rem; color:#666; margin-top:10px; }
+  </style>
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
-  <div id="quoteDisplay"></div>
-  <button id="newQuote">Show New Quote</button>
 
-  <div>
+  <div id="quoteDisplay">Click “Show New Quote” to get inspired!</div>
+
+  <div class="controls">
+    <button id="newQuote">Show New Quote</button>
+
+    <label for="categoryFilter" style="align-self:center;">Category:</label>
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+    </select>
+
+    <button id="exportBtn" class="secondary">Export JSON</button>
+
+    <!-- file input for import -->
+    <label for="importFile" style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+      <input id="importFile" type="file" accept=".json" style="display:none" />
+      <button id="importBtn" type="button">Import JSON</button>
+    </label>
+  </div>
+
+  <div class="input-section">
     <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
     <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button onclick="addQuote()">Add Quote</button>
+    <button id="addQuoteBtn">Add Quote</button>
+    <button id="clearStorage" class="secondary" title="Clear saved quotes">Clear Saved</button>
   </div>
+
+  <p class="note">Imported JSON must be an array of objects with `text` and `category` properties.</p>
 
   <script src="script.js"></script>
 </body>
