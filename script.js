@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Dynamic Quote Generator
    - localStorage persistence
    - sessionStorage for last shown quote
@@ -230,3 +231,44 @@ function init() {
 
 // run init when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
+=======
+// Default quotes array
+let quotes = [
+  { text: "The best way to predict the future is to invent it.", category: "Motivation" },
+  { text: "Life is what happens when you’re busy making other plans.", category: "Life" },
+  { text: "Code is like humor. When you have to explain it, it’s bad.", category: "Programming" }
+];
+
+// Display a random quote
+function showRandomQuote() {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const quoteDisplay = document.getElementById("quoteDisplay");
+  quoteDisplay.innerHTML = `
+    <p><strong>${quotes[randomIndex].category}</strong>: "${quotes[randomIndex].text}"</p>
+  `;
+}
+
+// Add a new quote
+function addQuote() {
+  const textInput = document.getElementById("newQuoteText");
+  const categoryInput = document.getElementById("newQuoteCategory");
+
+  const newQuote = {
+    text: textInput.value.trim(),
+    category: categoryInput.value.trim()
+  };
+
+  if (newQuote.text && newQuote.category) {
+    quotes.push(newQuote);
+    textInput.value = "";
+    categoryInput.value = "";
+    alert("Quote added successfully!");
+  } else {
+    alert("Please fill in both fields.");
+  }
+}
+
+// Event listeners
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
+>>>>>>> 22b754f (Add Dynamic Quote Generator project files)
